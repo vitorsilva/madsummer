@@ -1,0 +1,63 @@
+<html>
+    <script>
+        var inicio;
+        var tela;
+        var gc;
+
+        function Redesenhar() {
+            tela.width = tela.width;
+
+            console.log('aqui');
+            const tempoAtual = new Date().getTime();
+            dif = Math.round((tempoAtual - inicio) / 1000, 0);
+            if (dif>60) { 
+                dif=60;
+            };
+            console.log(dif);
+
+            // ampulheta
+            gc.fillStyle ="red";  
+            gc.beginPath();
+            gc.moveTo(20,20);   // 0
+            gc.lineTo(200,200);
+            gc.lineTo(20,200);
+            gc.lineTo(200,20); // 3
+            gc.closePath();
+            gc.stroke();
+
+            // quantidade tempo por passar
+            gc.fillStyle ="green";  
+            gc.beginPath();
+            gc.moveTo(110,110);   // 0
+            gc.lineTo(60+dif,60+dif);
+            gc.lineTo(160-dif,60+dif);
+            gc.closePath();
+            gc.fill();
+
+            // quantidade tempo já passou
+            gc.fillStyle ="green";  
+            gc.beginPath();
+            gc.moveTo(20,199);   // 0
+            gc.lineTo(199,199);
+            //gc.lineTo(110,170);
+            gc.lineTo(110,199-(dif/2));
+            gc.closePath();
+            gc.fill();
+            
+            return true;
+        }
+
+        window.onload = function() {
+            inicio = new Date().getTime();
+            tela = document.getElementById("tela");
+            gc = tela.getContext("2d");
+            setInterval(Redesenhar,1000);            
+        }
+
+
+    </script>
+    <body>
+            <canvas id="tela" width="300" height="200">
+                </canvas>
+    </body>
+</html>
